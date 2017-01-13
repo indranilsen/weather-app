@@ -10,5 +10,10 @@
     "Weather"
   ],
   "author": "Indranil Sen",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "compression": "^1.6.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.14.0"
+  }
 }
