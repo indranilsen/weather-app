@@ -6,6 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <link rel="stylesheet" href="https://gitcdn.link/repo/angular/bower-material/master/angular-material.css">
     <link rel="stylesheet" href="style.css" type="text/css" media="all">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
   <body ng-app="weatherApp" ng-controller="mainController">
@@ -22,7 +23,7 @@
 
       <div layout="row">
         <div class="search" flex="80"></div>
-        <div class="locate" flex="20"></div>
+        <div class="locate" flex="20"><i class="material-icons" ng-click="getLocation()">my_location</i></div>
       </div>
 
       <div class="window"></div>

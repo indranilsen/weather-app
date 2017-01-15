@@ -9,10 +9,11 @@ app.controller('mainController', function($scope, utils) {
 
   $scope.query;
 
-  console.log("Getting locaiton ...");
-  utils.location(function(location) {
+  $scope.getLocation = function(){
+    utils.location(function(location) {
     console.log(location.latitude, location.longitude);
   });
+};
 
 
 });
