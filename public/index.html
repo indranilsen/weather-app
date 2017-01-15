@@ -19,11 +19,27 @@
     <script src="app.js"></script>
     <script src="utils.js"></script>
 
-    <div layout="column" layout-align="center center">
+    <div class="container" layout="column" layout-align="center center">
 
-      <div layout="row">
-        <div class="search" flex="80"></div>
-        <div class="locate" flex="20"><i class="material-icons" ng-click="getLocation()">my_location</i></div>
+      <div class="bar" layout="row">
+        <div class="search" flex="80">
+          <form name="info">
+            <md-content class="md-no-momentum">
+              <md-input-container md-no-float class="md-block">
+                <md-icon><i class="material-icons">search</i></md-icon>
+                <input name="location" ng-model="query" type="text"
+                placeholder="Search for a location" maxlength="65" minlength="2"
+                ng-pattern="/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/"
+                ng-keyup="$event.keyCode == 13 && info.$valid ? getLocation() : null">
+                <div ng-messages="info.location.$error">
+                  <div ng-message-exp="['maxlength', 'minlength', 'pattern']">Invalid location name</div>
+                </div>
+              </md-input-container>
+            </md-content>
+          </form>
+        </div>
+
+        <div class="locate" flex="20"><i class="material-icons" ng-click="getLocationCoordinates()">my_location</i></div>
       </div>
 
       <div class="window"></div>

@@ -1,0 +1,41 @@
+body {
+	margin: 0;
+	font-family: HelveticaNeue-Light, Helvetica, Arial;
+}
+
+li:focus,
+p:focus,
+div:focus,
+img:focus,
+span:focus{
+  	outline:none !important;
+  	border: 0;
+}
+
+.container {
+  min-width: 100%;
+  width: 100%;
+  border: 1px solid red;
+}
+
+.container .bar {
+  border: 1px solid blue;
+  padding: 3em;
+  min-width: 500px;
+}
+
+.container .bar .search {
+  padding-top: 1em;
+}
+
+.container .bar .locate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .bar .locate > i {
+  cursor: pointer;
+  outline:none !important;
+  border: 0;
+}
