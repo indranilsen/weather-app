@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Weather App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <link rel="stylesheet" href="https://gitcdn.link/repo/angular/bower-material/master/angular-material.css">
+    <link rel="stylesheet" href="style.css" type="text/css" media="all">
+  </head>
+
+  <body ng-app="weatherApp" ng-controller="mainController">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
+	  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
+	  <script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.js"></script>
+
+    <script src="app.js"></script>
+    <script src="utils.js"></script>
+
+    <div layout="column" layout-align="center center">
+
+      <div layout="row">
+        <div class="search" flex="80"></div>
+        <div class="locate" flex="20"></div>
+      </div>
+
+      <div class="window"></div>
+
+    </div>
+
+  </body>
+</html>
