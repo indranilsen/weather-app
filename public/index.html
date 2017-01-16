@@ -33,7 +33,7 @@
                 ng-keyup="$event.keyCode == 13 && info.$valid ? getLocation() : null">
                 <div ng-messages="info.location.$error">
                   <div ng-message-exp="['maxlength', 'minlength', 'pattern']">Invalid location name</div>
-                  <div ng-message="validLocation">Custom error</div>
+                  <div ng-message="validLocation">Location must have [city / town / etc], [country]</div>
                 </div>
               </md-input-container>
             </md-content>

@@ -62,15 +62,28 @@ angular.module('weatherApp')
     };
 
     this.isValidLocationInput = function(location) {
-        var commaCount = 0;
+        let commaCount = 0;
         for(var i = 0; i<location.length-1; i++) {
             if(location.charCodeAt(i) === 44)
                 commaCount++;
         }
         if (commaCount > 2) {
-            return false;
+            return {validity: false, count: commaCount};
         } else {
-            return true;
+            return {validity: true, count: commaCount};
         }
     };
+
+    this.destructureLocation = function(location) {
+        let commaCount = this.isValidLocationInput(location).count;
+        var locationTokens = location.toLowerCase().split(',');
+        var countryIndex = 0;
+        if (commaCount === 1) {
+            countryIndex = 1;
+        } else if (commaCount === 2) {
+            countryIndex = 2;
+        }
+        return countryIndex > 0 ? {city:locationTokens[0], country:locationTokens[countryIndex]} : {city:locationTokens[0], country:""}
+    };
+
   });

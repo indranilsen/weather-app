@@ -25,9 +25,11 @@ app.controller('mainController', function($scope, $http, utils) {
   };
 
   $scope.getLocation = function() {
+     var location = utils.destructureLocation($scope.query);
+      console.log("RES", location);
       let reqParam = {
-          city: $scope.query,
-          countryCode: "CAN"
+          city: location.city,
+          countryCode: location.country
       };
     utils.getCurrentWeather("location", reqParam)
         .then(function(res){
@@ -46,7 +48,7 @@ app.directive('validLocation', function(utils) {
         link: function(scope, elm, attrs, ctrl) {
             ctrl.$validators.validLocation = function(modelValue, viewValue) {
                 if(viewValue) {
-                    return utils.isValidLocationInput(viewValue);
+                    return utils.isValidLocationInput(viewValue).validity;
                 }
             };
         }
