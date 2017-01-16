@@ -19,7 +19,7 @@ app.get('/api', function(req, res) {
 });
 
 app.get('/api/coords', function(req, res) {
-  res.send("COORDINATES");
+    res.send("COORDINATES");
 });
 
 app.get('/api/location', function(req, res) {
