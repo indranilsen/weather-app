@@ -1,7 +1,7 @@
 angular.module('weatherApp')
   .service('utils', function($q, $http) {
 
-    this.server = {
+    var server = {
       URL: "http://localhost:3000",
       routes: {
         base: "/",
@@ -17,7 +17,7 @@ angular.module('weatherApp')
     };
 
     var success = function(res) {
-      return(res.data);
+      return($q.resolve(res.data));
     };
 
     var error = function(res) {
@@ -42,22 +42,35 @@ angular.module('weatherApp')
           latitude: data.latitude,
           longitude: data.longitude
         };
-        var route = this.server.routes.coords;
+        var routeTarget = server.routes.coords;
       } else if (type==="location") {
         var parameters = {
           city: data.city,
           countryCode: data.countryCode
         };
-        var route = this.server.routes.location;
+        var routeTarget = server.routes.location;
       }
 
       var req = {
         method: 'GET',
-        url: this.server.URL+route,
+        url: server.URL+routeTarget,
         params: parameters
       };
 
       return $http(req).then(success, error);
 
+    };
+
+    this.isValidLocationInput = function(location) {
+        var commaCount = 0;
+        for(var i = 0; i<location.length-1; i++) {
+            if(location.charCodeAt(i) === 44)
+                commaCount++;
+        }
+        if (commaCount > 2) {
+            return false;
+        } else {
+            return true;
+        }
     };
   });

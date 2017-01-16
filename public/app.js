@@ -11,21 +11,25 @@ app.controller('mainController', function($scope, $http, utils) {
 
   $scope.getLocationCoordinates = function(){
       utils.location(function(location) {
-      console.log(location.latitude, location.longitude);
-      console.log(utils.server.URL+utils.server.routes.coords);
-      utils.getCurrentWeather("coords", {latitude: location.latitude, longitude: location.longitude})
-          .then(function(res){
-              console.log(res);
-          }, function(err){
-              console.log(err);
-          });
+          let reqParam = {
+              latitude: location.latitude,
+              longitude: location.longitude
+          };
+          utils.getCurrentWeather("coords", reqParam)
+              .then(function(res){
+                  console.log(res);
+              }, function(err){
+                  console.log(err);
+              });
     });
   };
 
   $scope.getLocation = function() {
-    console.log($scope.query);
-    console.log(utils.server.URL+utils.server.routes.location);
-    utils.getCurrentWeather("location", {city: $scope.query, countryCode: "CAN"})
+      let reqParam = {
+          city: $scope.query,
+          countryCode: "CAN"
+      };
+    utils.getCurrentWeather("location", reqParam)
         .then(function(res){
             console.log(res);
         }, function(err){
@@ -33,4 +37,18 @@ app.controller('mainController', function($scope, $http, utils) {
         });
   }
 
+});
+
+app.directive('validLocation', function(utils) {
+    return {
+        restrict: 'A',
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$validators.validLocation = function(modelValue, viewValue) {
+                if(viewValue) {
+                    return utils.isValidLocationInput(viewValue);
+                }
+            };
+        }
+    };
 });
