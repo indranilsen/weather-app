@@ -26,7 +26,6 @@ app.controller('mainController', function($scope, $http, utils) {
 
   $scope.getLocation = function() {
      var location = utils.destructureLocation($scope.query);
-      console.log("RES", location);
       let reqParam = {
           city: location.city,
           countryCode: location.country
