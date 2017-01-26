@@ -1,10 +1,15 @@
 var service = function() {
-    var someFunction = function() {
+    var getCurrentWeather = function() {
+
+    };
+
+    var getFiveDayForecast = function () {
 
     };
 
     return {
-      someFunction: someFunction
+      getCurrentWeather: getCurrentWeather,
+      getFiveDayForecast: getFiveDayForecast
     };
 };
 

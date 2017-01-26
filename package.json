@@ -4,7 +4,8 @@
   "description": "A simple SPA to display the weather",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js & nodemon public/appServer.js"
   },
   "keywords": [
     "Weather"
