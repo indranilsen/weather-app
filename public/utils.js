@@ -77,6 +77,12 @@ angular.module('weatherApp')
     this.destructureLocation = function(location) {
         let commaCount = this.isValidLocationInput(location).count;
         var locationTokens = location.toLowerCase().split(',');
+
+        for(var i = 0; i<locationTokens.length; i++) {
+            locationTokens[i] = locationTokens[i].trim();
+        }
+        
+        console.log("here");
         var countryIndex = 0;
         if (commaCount === 1) {
             countryIndex = 1;
