@@ -2,11 +2,11 @@ angular.module('weatherApp')
   .service('utils', function($q, $http) {
 
     var server = {
-      URL: "http://localhost:3000",
+      URL: 'http://localhost:3000',
       routes: {
-        base: "/",
-        coords: "/api/coords",
-        location: "/api/location"
+        base: '/',
+        coords: '/api/coords',
+        location: '/api/location'
       }
     };
 
@@ -37,13 +37,13 @@ angular.module('weatherApp')
     };
 
     this.getCurrentWeather = function(type, data) {
-      if (type==="coords") {
+      if (type==='coords') {
         var parameters = {
           latitude: data.latitude,
           longitude: data.longitude
         };
         var routeTarget = server.routes.coords;
-      } else if (type==="location") {
+      } else if (type==='location') {
         var parameters = {
           city: data.city,
           countryCode: data.countryCode
@@ -83,7 +83,7 @@ angular.module('weatherApp')
         } else if (commaCount === 2) {
             countryIndex = 2;
         }
-        return countryIndex > 0 ? {city:locationTokens[0], country:locationTokens[countryIndex]} : {city:locationTokens[0], country:""}
+        return countryIndex > 0 ? {city:locationTokens[0], country:locationTokens[countryIndex]} : {city:locationTokens[0], country:''}
     };
 
   });
