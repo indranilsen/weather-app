@@ -21,7 +21,7 @@
 
     <div class="container" layout="column" layout-align="center center">
 
-      <div class="bar" layout="row">
+      <div class="bar" layout="row"  layout-align="space-between">
         <div class="search" flex="80">
           <form name="info">
             <md-content class="md-no-momentum">
@@ -31,16 +31,18 @@
                 placeholder="Search for a location" maxlength="65" minlength="2" valid-location
                 ng-pattern="/^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/"
                 ng-keyup="$event.keyCode == 13 && info.$valid ? getLocation() : null">
+                <md-icon><i class="material-icons bar-button" ng-click="info.$valid ? getLocation() : null">keyboard_return</i></md-icon>
                 <div ng-messages="info.location.$error">
                   <div ng-message-exp="['maxlength', 'minlength', 'pattern']">Invalid location name</div>
                   <div ng-message="validLocation">Location must have [city / town / etc], [country]</div>
                 </div>
               </md-input-container>
+
             </md-content>
           </form>
         </div>
 
-        <div class="locate" flex="20"><i class="material-icons" ng-click="getLocationCoordinates()">my_location</i></div>
+        <div class="locate" flex="20"><i class="material-icons bar-button" ng-click="getLocationCoordinates()">my_location</i></div>
       </div>
 
       <div class="window"></div>
