@@ -3,8 +3,8 @@ var http = require('http');
 var service = function() {
     var weatherApi = {
         endpoints: {
-            currentWeather: 'api.openweathermap.org/data/2.5/weather',
-            fiveDayForecast: 'api.openweathermap.org/data/2.5/forecast'
+            currentWeather: 'http://api.openweathermap.org/data/2.5/weather',
+            fiveDayForecast: 'http://api.openweathermap.org/data/2.5/forecast'
         },
         parameters: {
             location: '?q=',
@@ -84,7 +84,7 @@ var service = function() {
             console.log(url);
         }
 
-        makeApiCall('http://'+url).then(function(res){console.log(res);});
+        return makeApiCall(url);
     };
 
     return {

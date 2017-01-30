@@ -41,3 +41,7 @@ span:focus{
     outline:none !important;
     border: 0;
 }
+
+.window {
+	border: 1px solid blue;
+}

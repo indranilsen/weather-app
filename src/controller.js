@@ -5,8 +5,10 @@ var controller = function(service) {
     };
 
     var getCurrentWeatherByLocation = function(req, res) {
-        res.send("LOCATION");
-        service.getWeather('fiveDayForecast', 'location', req.query);
+        service.getWeather('currentWeather', 'location', req.query).then(function (data) {
+            console.log(data);
+            res.send(data);
+        });
     };
 
     return {

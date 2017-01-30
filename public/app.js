@@ -8,9 +8,11 @@ app.controller('mainController', function($scope, $http, utils) {
   console.log("Hello from mainController");
 
   $scope.query;
+  $scope.data;
+  $scope.page = 'currentWeather';
 
-  $scope.getLocationCoordinates = function(){
-      utils.location(function(location) {
+  $scope.getLocationCoordinates = function() {
+      utils.location(function (location) {
           let reqParam = {
               latitude: location.latitude,
               longitude: location.longitude
@@ -18,10 +20,11 @@ app.controller('mainController', function($scope, $http, utils) {
           utils.getCurrentWeather("coords", reqParam)
               .then(function(res){
                   console.log(res);
+                  $scope.data = res;
               }, function(err){
                   console.log(err);
               });
-    });
+        });
   };
 
   $scope.getLocation = function() {
@@ -33,10 +36,11 @@ app.controller('mainController', function($scope, $http, utils) {
     utils.getCurrentWeather("location", reqParam)
         .then(function(res){
             console.log(res);
+            $scope.data = res;
         }, function(err){
             console.log(err);
         });
-  }
+  };
 
 });
 
