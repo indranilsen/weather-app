@@ -16,22 +16,23 @@ var service = function() {
     };
 
     var makeApiCall = function (url) {
+        return new Promise(function(resolve, reject) {
             var request = http.get(url, function(res) {
                 const statusCode = res.statusCode;
                 const contentType = res.headers['content-type'];
+
                 var error;
                 var rawData = '';
 
                 if (statusCode !== 200) {
                     error = new Error('Error: ', statusCode);
-                } else if (contentType !== 'application/json') {
+                } else if (!contentType.includes('application/json')) {
                     error = new Error('Invalid content-type: ', contentType);
                 }
 
                 if (error) {
-                    console.log("=========>", error.message);
                     res.resume();
-                    return;
+                    reject(error.message)
                 }
 
                 res.setEncoding('utf8');
@@ -43,16 +44,16 @@ var service = function() {
                 res.on('end', function() {
                     try {
                         var data = JSON.parse(rawData);
-                        console.log(data);
+                        resolve(data);
                     } catch (exception ) {
-                        console.log(exception .message);
+                        reject(exception.message);
                     }
                 });
             });
-
             request.on('error', function (err) {
-                console.log("=========>*", err);
+                reject(exception.message);
             });
+        });
     };
 
     var getWeather = function(weatherType, inputType, data) {
@@ -83,7 +84,7 @@ var service = function() {
             console.log(url);
         }
 
-        makeApiCall('http://'+url);
+        makeApiCall('http://'+url).then(function(res){console.log(res);});
     };
 
     return {
