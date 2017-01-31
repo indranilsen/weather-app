@@ -3,9 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>Weather App</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/weather-icons.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="css/weather-icons-wind.min.css" type="text/css" media="all">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.1/angular-material.min.css">
-    <link rel="stylesheet" href="style.css" type="text/css" media="all">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
 
@@ -21,7 +23,7 @@
 
     <div class="container" layout="column" layout-align="center center">
 
-      <div class="bar" layout="row"  layout-align="space-between">
+      <div class="bar" layout="row" layout-align="space-between">
         <div class="search" flex="80">
           <form name="info">
             <md-content class="md-no-momentum">
@@ -45,7 +47,52 @@
         <div class="locate" flex="20"><i class="material-icons bar-button" ng-click="getLocationCoordinates()">my_location</i></div>
       </div>
 
-      <div class="window"></div>
+      <div class="window">
+          <md-content class="md-padding">
+            <md-nav-bar md-selected-nav-item="page" nav-bar-aria-label="navigation links">
+              <md-nav-item md-nav-click="goto('currentWeather')" name="currentWeather">Current Weather</md-nav-item>
+              <md-nav-item md-nav-click="goto('fiveDayForecast')" name="fiveDayForecast">Forecast</md-nav-item>
+            </md-nav-bar>
+            <div class="weather-content">
+              <md-card>
+                <md-card-content class="highlight" layout="row">
+                    <div class="highlight-text" flex="70">
+                        <h2>San Francisco</h2>
+                        <h4>Sunny</h3>
+                        <h5>Today | Monday</h3>
+                    </div>
+
+                    <div class="highlight-icon" flex="30">
+                        <ul>
+                            <li><i class="wi wi-day-sunny"></i></li>
+                            <li>10 &deg;C</i></li>
+                        </ul>
+                    </div>
+                </md-card-content>
+                <md-card-content class="main-features">
+                    <div layout="row" layout-align="space-around">
+                    <ul layout="column" layout-align="center center">
+                        <li><i class="wi wi-thermometer"></i></li>
+                        <li>10 &deg;C</li>
+                    </ul>
+                    <ul layout="column" layout-align="center center">
+                        <li><i class="wi wi-raindrops"></i></li>
+                        <li>10&#37;</li>
+                    </ul>
+                    <ul layout="column" layout-align="center center">
+                        <li><i class="wi wi-wind towards-45-deg"></i></li>
+                        <li>10 km/h | NE</li>
+                    </ul>
+                    </div>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                  <md-button>Action 1</md-button>
+                  <md-button>Action 2</md-button>
+                </md-card-actions>
+              </md-card>
+            </div>
+          </md-content>
+      </div>
 
     </div>
 

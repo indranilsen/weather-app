@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	font-family: HelveticaNeue-Light, Helvetica, Arial;
+	font-family: Roboto, HelveticaNeue-Light, Helvetica, Arial;
 }
 
 li:focus,
@@ -10,6 +10,12 @@ img:focus,
 span:focus{
   	outline:none !important;
   	border: 0;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 .container {
@@ -44,4 +50,59 @@ span:focus{
 
 .window {
 	border: 1px solid blue;
+	min-width: 500px;
+}
+
+.window .weather-content .highlight {
+	padding-bottom: 0;
+}
+
+.window .weather-content .highlight > * {
+	border-bottom: 1px solid grey;
+}
+
+.window .weather-content .highlight .highlight-text {
+	padding: 0.5em;
+}
+
+.window .weather-content .highlight .highlight-text > * {
+	margin: 0;
+	font-weight: 100;
+	padding-bottom: 0.3em;
+}
+
+.window .weather-content .highlight .highlight-text > h2 {
+	font-weight: normal;
+}
+
+.window .weather-content .highlight .highlight-icon ul {
+	height: 100%;
+	display: flex;
+	flex: 1 1 100%;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	font-weight: 100;
+}
+
+.window .weather-content .highlight .highlight-icon li:first-child {
+	font-size: 2.5em;
+	color: #454545;
+}
+
+.window .weather-content .highlight .highlight-icon li:nth-child(2) {
+	font-size: 1.2em;
+}
+
+.window .weather-content .main-features {
+	padding-top: 0;
+}
+
+.window .weather-content .main-features div {
+	border-bottom: 1px solid grey;
+	padding: 0.2em 20% 0.2em 20%;
+}
+
+.window .weather-content .main-features div ul:nth-child(2) li:first-child {
+	font-size: 1.6em;
 }
