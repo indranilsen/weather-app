@@ -103,6 +103,54 @@ ul {
 	padding: 0.2em 20% 0.2em 20%;
 }
 
+.window .weather-content .main-features div ul li:first-child {
+	align-self: center;
+	justify-content: center;
+}
+
+.window .weather-content .main-features div ul li:nth-child(2) {
+	font-size: 0.8em;
+}
+
+.window .weather-content .main-features div ul:nth-child(2) {
+	border-left: 1px solid grey;
+	border-right: 1px solid grey;
+	padding-left: 1.1em;
+	padding-right: 1.1em;
+}
+
+.window .weather-content .main-features div ul:nth-child(1) li:first-child {
+	padding-top: 0.2em;
+}
+
 .window .weather-content .main-features div ul:nth-child(2) li:first-child {
-	font-size: 1.6em;
+	font-size: 1.5em;
+}
+
+.window .weather-content .main-features div ul:nth-child(3) li:first-child {
+	font-size: 1.2em;
+}
+
+.window .weather-content .other-features ul {
+	font-weight: 100;
+	padding-bottom: 0.2em;
+	width: 70%;
+}
+
+.window .weather-content .other-features .other-features-left {
+	display: flex;
+	justify-content: flex-end;
+	padding-right: 0.5em;
+}
+
+/*.window .weather-content .other-features .other-features-left ul {
+	width: 70%;
+}*/
+
+.window .weather-content .other-features .other-features-left ul li:first-child{
+	font-size: 1.3em;
+}
+
+.window .weather-content .other-features .other-features-right {
+	padding-left: 0.5em;
 }
