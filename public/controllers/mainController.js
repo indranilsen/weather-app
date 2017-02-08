@@ -1,9 +1,11 @@
-app.controller('mainController', function($scope, $http, utils) {
+app.controller('mainController', function($scope, $http, utils, processData) {
   console.log("Hello from mainController");
 
   $scope.query;
   $scope.data;
   $scope.page = 'currentWeather';
+
+  processData.process('this is a function');
 
   $scope.getLocationCoordinates = function() {
       utils.location(function (location) {
