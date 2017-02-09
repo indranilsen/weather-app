@@ -61,11 +61,17 @@ angular.module('weatherApp')
             }
 
             if (scale === 'c') {
-                return Math.round(temperature - _C.CELCIUS);
+                return {
+                    val: Math.round(temperature - _C.CELCIUS),
+                    unit: 'C'
+                };
             } else if (scale === 'f') {
-                return Math.round(
-                    (temperature * _C.FAHRENHEIT_MULT) - _C.FAHRENHEIT
-                );
+                return {
+                    val: Math.round(
+                        (temperature * _C.FAHRENHEIT_MULT) - _C.FAHRENHEIT
+                    ),
+                    unit: 'F'
+                };
             }
         };
 
@@ -78,9 +84,15 @@ angular.module('weatherApp')
             }
 
             if (system === 'kph') {
-                return Math.round(speed * _C.KPH);
+                return {
+                    val: Math.round(speed * _C.KPH),
+                    unit: 'km/h'
+                };
             } else if (system === 'mph') {
-                return Math.round(speed * _C.MPH);
+                return {
+                    val: Math.round(speed * _C.MPH),
+                    unit: 'mi/h'
+                };
             }
         };
 
@@ -92,7 +104,16 @@ angular.module('weatherApp')
                 return 'N/A';
             }
 
-            return new Date(utc * _C.UTC_SECONDS);
+            let date = new Date(utc * _C.UTC_SECONDS);
+
+            return {
+                date: date.getDate(),
+                day: date.getDay(),
+                year: date.getFullYear(),
+                hours: date.getHours(),
+                minutes: date.getMinutes(),
+                month: date.getMonth(),
+            };
         };
 
         var processDegrees = function(deg) {
