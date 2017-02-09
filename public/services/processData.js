@@ -1,5 +1,5 @@
 angular.module('weatherApp')
-    .service('processData', function () {
+    .service('processData', function(iconData) {
 
         processedData = {};
 
@@ -12,19 +12,21 @@ angular.module('weatherApp')
             UTC_SECONDS: 1000
         };
 
-        this.process = function (rawData) {
+        this.process = function(rawData) {
             // rawData.weather[0]
             console.log(processString('this is a function'));
             console.log(processTemperature('282.438', 'c'));
             console.log(processDegrees('10'));
             console.log(processUTC('1486610189'));
+            console.log(processIcons.weather('800', 10));
+            console.log(processIcons.mainFeatures(10));
         };
 
-        String.prototype.capitalizeFirstLetter = function () {
+        String.prototype.capitalizeFirstLetter = function() {
             return this.charAt(0).toUpperCase() + this.slice(1);
         }
 
-        var enforceNumber = function (val) {
+        var enforceNumber = function(val) {
             let error = new Error('Cannot convert value to number');
 
             if (typeof val === 'string') {
@@ -33,24 +35,24 @@ angular.module('weatherApp')
                     throw error;
                 }
                 return val;
-            } else if (typeof val === 'number' ) {
+            } else if (typeof val === 'number') {
                 return val;
             } else {
                 throw error;
             }
         };
 
-        var processString = function (str) {
+        var processString = function(str) {
             let tokens = str.trim().split(' ');
 
-            for (let i = 0; i<tokens.length; i++) {
+            for (let i = 0; i < tokens.length; i++) {
                 tokens[i] = tokens[i].capitalizeFirstLetter();
             }
 
             return tokens.join(' ');
         };
 
-        var processTemperature = function (temperature, scale) {
+        var processTemperature = function(temperature, scale) {
             try {
                 temperature = enforceNumber(temperature);
             } catch (e) {
@@ -67,7 +69,7 @@ angular.module('weatherApp')
             }
         };
 
-        var processSpeed = function (speed, system) {
+        var processSpeed = function(speed, system) {
             try {
                 speed = enforceNumber(speed);
             } catch (e) {
@@ -82,7 +84,7 @@ angular.module('weatherApp')
             }
         };
 
-        var processUTC = function (utc) {
+        var processUTC = function(utc) {
             try {
                 utc = enforceNumber(utc);
             } catch (e) {
@@ -93,7 +95,7 @@ angular.module('weatherApp')
             return new Date(utc * _C.UTC_SECONDS);
         };
 
-        var processDegrees = function (deg) {
+        var processDegrees = function(deg) {
             try {
                 deg = enforceNumber(deg);
             } catch (e) {
@@ -102,8 +104,8 @@ angular.module('weatherApp')
             }
 
             switch (true) {
-                case (deg >=  348.75 && deg <= 360 ||
-                    deg >=  0 && deg < 11.25):
+                case (deg >= 348.75 && deg <= 360 ||
+                    deg >= 0 && deg < 11.25):
                     return 'N';
                     break;
                 case (deg >= 11.25 && deg < 33.75):
@@ -155,5 +157,49 @@ angular.module('weatherApp')
                     return 'N/A';
             }
         }
+
+        var processIcons = {
+            weather: function(code, hrs) {
+                let time;
+                let icon = iconData.data[code].icon;
+
+                if (hrs >= 6 && hrs < 20) {
+                    time = 'day';
+                } else {
+                    time = 'night';
+                    if (code == 800) {
+                        return 'wi wi-night-clear';
+                    }
+                }
+
+                if (!(code >= 700 && code < 800) &&
+                    !(code >= 900 && code < 1000)) {
+                    if (time === 'day') {
+                        icon = 'day-' + icon;
+                    } else if (time === 'night') {
+                        icon = 'night-' + icon;
+                    }
+                }
+                return 'wi wi-' + icon;
+            },
+            mainFeatures: function(deg) {
+                let direction = 'wi wi-wind wi-towards-' +
+                    processDegrees(deg).toLowerCase();
+
+                return {
+                    thermometer: 'wi wi-thermometer',
+                    rain: 'wi wi-raindrops',
+                    wind: direction
+                };
+            },
+            otherFeatures: function () {
+                return {
+                    sunrise: 'wi wi-sunrise',
+                    sunset: 'wi wi-sunset',
+                    humidity: 'wi wi-humidity',
+                    pressure: 'wi wi-barometer'
+                };
+            }
+        };
 
     });
