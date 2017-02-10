@@ -13,13 +13,82 @@ angular.module('weatherApp')
         };
 
         this.process = function(rawData) {
-            // rawData.weather[0]
-            console.log(processString('this is a function'));
-            console.log(processTemperature('282.438', 'c'));
-            console.log(processDegrees('10'));
-            console.log(processUTC('1486610189'));
-            console.log(processIcons.weather('800', 10));
-            console.log(processIcons.mainFeatures(10));
+            // console.log(processString('this is a function'));
+            // console.log(processTemperature('282.438', 'c'));
+            // console.log(processDegrees('10'));
+            // console.log(processUTC('1486610189'));
+            // console.log(processIcons.weather('800', 10));
+            // console.log(processIcons.mainFeatures(10));
+
+            const time = processTime(rawData.dt);
+
+            processedData.time = time;
+
+            processedData.city = processString(
+                rawData.name
+            );
+
+            processedData.country = processString(
+                rawData.sys.country
+            );
+
+            processedData.weatherMain = processString(
+                rawData.weather[0].main
+            );
+
+            processedData.weatherDescription = processString(
+                rawData.weather[0].description
+            );
+
+            processedData.temperature = processTemperature(
+                rawData.main.temp,
+                'c'
+            );
+
+            processedData.pressure = processPressure(
+                rawData.main.pressure,
+                'mb'
+            );
+
+            processedData.windSpeed = processSpeed(
+                rawData.wind.speed,
+                'kph'
+            );
+
+            processedData.windDirection = processDegrees(
+                rawData.wind.deg
+            );
+
+            processedData.sunrise = processTime(
+                rawData.sys.sunrise
+            );
+
+            processedData.sunset = processTime(
+                rawData.sys.sunset
+            );
+
+            processedData.weatherIcon = processIcons.weather(
+                rawData.weather[0].id,
+                time.hours
+            );
+
+            processedData.mainFeaturesIcon = processIcons.mainFeatures(
+                rawData.wind.deg
+            );
+
+            processedData.otherFeaturesIcon = processIcons.otherFeatures();
+
+            processedData.humidity = appendSuffix(
+                rawData.main.humidity,
+                '%'
+            );
+
+            processedData.percentCloud = appendSuffix(
+                rawData.clouds.all,
+                '%'
+            );
+
+            return processedData;
         };
 
         String.prototype.capitalizeFirstLetter = function() {
@@ -75,6 +144,27 @@ angular.module('weatherApp')
             }
         };
 
+        var processPressure = function(pressure, scale) {
+            try {
+                pressure = enforceNumber(pressure);
+            } catch (e) {
+                console.log(e.message);
+                return 'N/A';
+            }
+
+            if (scale === 'mb') {
+                return {
+                    val: pressure,
+                    unit: 'mb'
+                };
+            } else if (scale === 'f') {
+                return {
+                    val: pressure,
+                    unit: 'hPa'
+                };
+            }
+        };
+
         var processSpeed = function(speed, system) {
             try {
                 speed = enforceNumber(speed);
@@ -96,7 +186,7 @@ angular.module('weatherApp')
             }
         };
 
-        var processUTC = function(utc) {
+        var processTime = function(utc) {
             try {
                 utc = enforceNumber(utc);
             } catch (e) {
@@ -223,4 +313,17 @@ angular.module('weatherApp')
             }
         };
 
+        var appendSuffix = function(value, suffix) {
+            try {
+                value = enforceNumber(value);
+            } catch (e) {
+                console.log(e.message);
+                return 'N/A';
+            }
+
+            return {
+                val: value,
+                unit: suffix
+            };
+        };
     });

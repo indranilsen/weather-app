@@ -82,7 +82,6 @@ angular.module('weatherApp')
             locationTokens[i] = locationTokens[i].trim();
         }
         
-        console.log("here");
         var countryIndex = 0;
         if (commaCount === 1) {
             countryIndex = 1;

@@ -5,8 +5,6 @@ app.controller('mainController', function($scope, $http, utils, processData) {
   $scope.data;
   $scope.page = 'currentWeather';
 
-  processData.process('this is a function');
-
   $scope.getLocationCoordinates = function() {
       utils.location(function (location) {
           let reqParam = {
@@ -16,7 +14,7 @@ app.controller('mainController', function($scope, $http, utils, processData) {
           utils.getCurrentWeather("coords", reqParam)
               .then(function(res){
                   console.log(res);
-                  $scope.data = res;
+                  $scope.data = processData.process(res);
               }, function(err){
                   console.log(err);
               });
@@ -32,7 +30,8 @@ app.controller('mainController', function($scope, $http, utils, processData) {
     utils.getCurrentWeather("location", reqParam)
         .then(function(res){
             console.log(res);
-            $scope.data = res;
+            $scope.data = processData.process(res);
+            console.log($scope.data);
         }, function(err){
             console.log(err);
         });
