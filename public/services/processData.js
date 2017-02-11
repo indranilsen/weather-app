@@ -13,13 +13,6 @@ angular.module('weatherApp')
         };
 
         this.process = function(rawData) {
-            // console.log(processString('this is a function'));
-            // console.log(processTemperature('282.438', 'c'));
-            // console.log(processDegrees('10'));
-            // console.log(processUTC('1486610189'));
-            // console.log(processIcons.weather('800', 10));
-            // console.log(processIcons.mainFeatures(10));
-
             const time = processTime(rawData.dt);
 
             processedData.time = time;
@@ -111,6 +104,36 @@ angular.module('weatherApp')
             }
         };
 
+        var getMonth = function(val, length) {
+            const months = {
+                long: ['January', 'February', 'March', 'April',
+                'May', 'June', 'July', 'August', 'September',
+                'October', 'November', 'December'],
+                short: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            };
+
+            if (length === 'long') {
+                return months.long[val];
+            } else if (length === 'short') {
+                return months.short[val];
+            }
+        };
+
+        var getDay = function(val, length) {
+            const days = {
+                long: ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
+                'Friday', 'Saturday', 'Sunday'],
+                short: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            };
+
+            if (length === 'long') {
+                return days.long[val];
+            } else if (length === 'short') {
+                return days.short[val];
+            }
+        };
+
         var processString = function(str) {
             let tokens = str.trim().split(' ');
 
@@ -195,14 +218,15 @@ angular.module('weatherApp')
             }
 
             let date = new Date(utc * _C.UTC_SECONDS);
+            let format = 'long';
 
             return {
                 date: date.getDate(),
-                day: date.getDay(),
                 year: date.getFullYear(),
                 hours: date.getHours(),
                 minutes: date.getMinutes(),
-                month: date.getMonth(),
+                day: getDay(date.getDay(), format),
+                month: getMonth(date.getMonth(), format),
             };
         };
 
