@@ -21,6 +21,7 @@
     <script src="app.js"></script>
     <script src="controllers/mainController.js"></script>
     <script src="directives/validLocation.js"></script>
+    <script src="directives/weatherAppWindow.js"></script>
     <script src="services/utils.js"></script>
     <script src="services/processData.js"></script>
     <script src="services/iconData.js"></script>
@@ -51,97 +52,7 @@
         <div class="locate" flex="20"><i class="material-icons bar-button" ng-click="getLocationCoordinates()">my_location</i></div>
       </div>
 
-      <div class="window">
-          <md-content class="md-padding">
-            <md-nav-bar md-selected-nav-item="page" nav-bar-aria-label="navigation links">
-              <md-nav-item md-nav-click="goto('currentWeather')" name="currentWeather">Current Weather</md-nav-item>
-              <md-nav-item md-nav-click="goto('fiveDayForecast')" name="fiveDayForecast">Forecast</md-nav-item>
-            </md-nav-bar>
-            <div class="weather-content">
-              <md-card>
-                <md-card-content class="highlight" layout="row">
-                    <div class="highlight-text" flex="70">
-                        <h2>{{data.city}}</h2>
-                        <h4>{{data.weatherDescription}}</h3>
-                        <h5>Today | {{data.time.day}}</h3>
-                    </div>
-
-                    <div class="highlight-icon" flex="30">
-                        <ul>
-                            <li><i ng-class="data.weatherIcon"></i></li>
-                            <li>{{data.temperature.val}} &deg;{{data.temperature.unit}}</li>
-                        </ul>
-                    </div>
-                </md-card-content>
-
-                <md-card-content class="main-features">
-                    <div layout="row" layout-align="space-around">
-                        <ul layout="column" layout-align="space-between">
-                            <li><i ng-class="data.mainFeaturesIcon.thermometer"></i></li>
-                            <li>
-                                {{data.temperature.val}} &deg;{{data.temperature.unit}} | {{data.temperature.val}} &deg;{{data.temperature.unit}}
-                            </li>
-                        </ul>
-                        <ul layout="column" layout-align="space-between">
-                            <li><i ng-class="data.mainFeaturesIcon.rain"></i></li>
-                            <li>10&#37;</li>
-                        </ul>
-                        <ul layout="column" layout-align="space-between">
-                            <li><i ng-class="data.mainFeaturesIcon.wind"></i></li>
-                            <li>
-                                {{data.windSpeed.val}} {{data.windSpeed.unit}} | {{data.windDirection}}
-                            </li>
-                        </ul>
-                    </div>
-                </md-card-content>
-
-                <div class="other-features" layout="column" layout-align="center center">
-                    <ul layout="row">
-                        <li class="other-features-left" flex="50" layout-align="end">
-                            <ul layout="row" layout-align="space-between">
-                                <li><i ng-class="data.otherFeaturesIcon.sunrise"></i></li>
-                                <li>Sunrise</li>
-                            </ul>
-                        </li>
-                        <li class="other-features-right" flex="50">{{data.sunrise.hours}}:{{data.sunrise.minutes}}</li>
-                    </ul>
-                    <ul layout="row">
-                        <li class="other-features-left" flex="50" layout-align="end">
-                            <ul layout="row" layout-align="space-between">
-                                <li><i ng-class="data.otherFeaturesIcon.sunset"></i></li>
-                                <li>Sunset</li>
-                            </ul>
-                        </li>
-                        <li class="other-features-right" flex="50">{{data.sunset.hours}}:{{data.sunset.minutes}}</li>
-                    </ul>
-                    <ul layout="row">
-                        <li class="other-features-left" flex="50" layout-align="end">
-                            <ul layout="row" layout-align="space-between">
-                                <li><i ng-class="data.otherFeaturesIcon.humidity"></i></li>
-                                <li>Humidity</li>
-                            </ul>
-                        </li>
-                        <li class="other-features-right" flex="50">{{data.humidity.val}} {{data.humidity.unit}}</li>
-                    </ul>
-                    <ul layout="row">
-                        <li class="other-features-left" flex="50" layout-align="end">
-                            <ul layout="row" layout-align="space-between">
-                                <li><i ng-class="data.otherFeaturesIcon.pressure"></i></li>
-                                <li>Pressure</li>
-                            </ul>
-                        </li>
-                        <li class="other-features-right" flex="50">{{data.pressure.val}} {{data.pressure.unit}}</li>
-                    </ul>
-                </div>
-
-                <md-card-actions layout="row" layout-align="end center">
-                  <md-button>Action 1</md-button>
-                  <md-button>Action 2</md-button>
-                </md-card-actions>
-              </md-card>
-            </div>
-          </md-content>
-      </div>
+    <weather-app-window ng-model="dataReceived"></weather-app-window>
 
     </div>
 

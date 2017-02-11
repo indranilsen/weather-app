@@ -3,7 +3,6 @@ app.controller('mainController', function($scope, $http, utils, processData) {
 
   $scope.query;
   $scope.data;
-  $scope.page = 'currentWeather';
 
   $scope.getLocationCoordinates = function() {
       utils.location(function (location) {
@@ -15,6 +14,7 @@ app.controller('mainController', function($scope, $http, utils, processData) {
               .then(function(res){
                   console.log(res);
                   $scope.data = processData.process(res);
+                  $scope.$broadcast('data-received');
               }, function(err){
                   console.log(err);
               });
@@ -29,9 +29,8 @@ app.controller('mainController', function($scope, $http, utils, processData) {
       };
     utils.getCurrentWeather("location", reqParam)
         .then(function(res){
-            console.log(res);
             $scope.data = processData.process(res);
-            console.log($scope.data);
+            $scope.$broadcast('data-received');
         }, function(err){
             console.log(err);
         });
