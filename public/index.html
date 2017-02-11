@@ -61,15 +61,15 @@
               <md-card>
                 <md-card-content class="highlight" layout="row">
                     <div class="highlight-text" flex="70">
-                        <h2>San Francisco</h2>
-                        <h4>Sunny</h3>
-                        <h5>Today | Monday</h3>
+                        <h2>{{data.city}}</h2>
+                        <h4>{{data.weatherDescription}}</h3>
+                        <h5>Today | {{data.time.day}}</h3>
                     </div>
 
                     <div class="highlight-icon" flex="30">
                         <ul>
-                            <li><i class="wi wi-day-sunny"></i></li>
-                            <li>10 &deg;C</i></li>
+                            <li><i ng-class="data.weatherIcon"></i></li>
+                            <li>{{data.temperature.val}} &deg;{{data.temperature.unit}}</li>
                         </ul>
                     </div>
                 </md-card-content>
@@ -77,16 +77,20 @@
                 <md-card-content class="main-features">
                     <div layout="row" layout-align="space-around">
                         <ul layout="column" layout-align="space-between">
-                            <li><i class="wi wi-thermometer"></i></li>
-                            <li>10 &deg;C | 11 &deg;C</li>
+                            <li><i ng-class="data.mainFeaturesIcon.thermometer"></i></li>
+                            <li>
+                                {{data.temperature.val}} &deg;{{data.temperature.unit}} | {{data.temperature.val}} &deg;{{data.temperature.unit}}
+                            </li>
                         </ul>
                         <ul layout="column" layout-align="space-between">
-                            <li><i class="wi wi-raindrops"></i></li>
+                            <li><i ng-class="data.mainFeaturesIcon.rain"></i></li>
                             <li>10&#37;</li>
                         </ul>
                         <ul layout="column" layout-align="space-between">
-                            <li><i class="wi wi-wind towards-45-deg"></i></li>
-                            <li>10 km/h | NE</li>
+                            <li><i ng-class="data.mainFeaturesIcon.wind"></i></li>
+                            <li>
+                                {{data.windSpeed.val}} {{data.windSpeed.unit}} | {{data.windDirection}}
+                            </li>
                         </ul>
                     </div>
                 </md-card-content>
@@ -95,20 +99,38 @@
                     <ul layout="row">
                         <li class="other-features-left" flex="50" layout-align="end">
                             <ul layout="row" layout-align="space-between">
-                                <li><i class="wi wi-sunrise"></i></li>
+                                <li><i ng-class="data.otherFeaturesIcon.sunrise"></i></li>
                                 <li>Sunrise</li>
                             </ul>
                         </li>
-                        <li class="other-features-right" flex="50">6:30 a.m.</li>
+                        <li class="other-features-right" flex="50">{{data.sunrise.hours}}:{{data.sunrise.minutes}}</li>
                     </ul>
                     <ul layout="row">
                         <li class="other-features-left" flex="50" layout-align="end">
                             <ul layout="row" layout-align="space-between">
-                                <li><i class="wi wi-sunrise"></i></li>
-                                <li>Sunrise</li>
+                                <li><i ng-class="data.otherFeaturesIcon.sunset"></i></li>
+                                <li>Sunset</li>
                             </ul>
                         </li>
-                        <li class="other-features-right" flex="50">6:30 a.m.</li>
+                        <li class="other-features-right" flex="50">{{data.sunset.hours}}:{{data.sunset.minutes}}</li>
+                    </ul>
+                    <ul layout="row">
+                        <li class="other-features-left" flex="50" layout-align="end">
+                            <ul layout="row" layout-align="space-between">
+                                <li><i ng-class="data.otherFeaturesIcon.humidity"></i></li>
+                                <li>Humidity</li>
+                            </ul>
+                        </li>
+                        <li class="other-features-right" flex="50">{{data.humidity.val}} {{data.humidity.unit}}</li>
+                    </ul>
+                    <ul layout="row">
+                        <li class="other-features-left" flex="50" layout-align="end">
+                            <ul layout="row" layout-align="space-between">
+                                <li><i ng-class="data.otherFeaturesIcon.pressure"></i></li>
+                                <li>Pressure</li>
+                            </ul>
+                        </li>
+                        <li class="other-features-right" flex="50">{{data.pressure.val}} {{data.pressure.unit}}</li>
                     </ul>
                 </div>
 
