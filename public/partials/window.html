@@ -1,8 +1,8 @@
 <div class="window" ng-show="showData">
     <md-content class="md-padding">
       <md-nav-bar md-selected-nav-item="page" nav-bar-aria-label="navigation links">
-        <md-nav-item md-nav-click="goto('currentWeather')" name="currentWeather">Current Weather</md-nav-item>
-        <md-nav-item md-nav-click="goto('fiveDayForecast')" name="fiveDayForecast">Forecast</md-nav-item>
+        <md-nav-item md-nav-click="goto('currentWeather'); showTab('currentWeather')" name="currentWeather">Current Weather</md-nav-item>
+        <md-nav-item md-nav-click="goto('fiveDayForecast'); showTab('fiveDayForecast')" name="fiveDayForecast">Forecast</md-nav-item>
       </md-nav-bar>
       <div class="weather-content">
         <md-card>
@@ -41,6 +41,47 @@
                   </ul>
               </div>
           </md-card-content>
+
+          <div ng-show="showCurrentWeather" class="other-features" layout="column" layout-align="center center">
+              <ul layout="row">
+                  <li class="other-features-left" flex="50" layout-align="end">
+                      <ul layout="row" layout-align="space-between">
+                          <li><i ng-class="data.otherFeaturesIcon.sunrise"></i></li>
+                          <li>Sunrise</li>
+                      </ul>
+                  </li>
+                  <li class="other-features-right" flex="50">{{data.sunrise.formattedTime}}</li>
+              </ul>
+              <ul layout="row">
+                  <li class="other-features-left" flex="50" layout-align="end">
+                      <ul layout="row" layout-align="space-between">
+                          <li><i ng-class="data.otherFeaturesIcon.sunset"></i></li>
+                          <li>Sunset</li>
+                      </ul>
+                  </li>
+                  <li class="other-features-right" flex="50">{{data.sunset.formattedTime}}</li>
+              </ul>
+              <ul layout="row">
+                  <li class="other-features-left" flex="50" layout-align="end">
+                      <ul layout="row" layout-align="space-between">
+                          <li><i ng-class="data.otherFeaturesIcon.humidity"></i></li>
+                          <li>Humidity</li>
+                      </ul>
+                  </li>
+                  <li class="other-features-right" flex="50">{{data.humidity.val}} {{data.humidity.unit}}</li>
+              </ul>
+              <ul layout="row">
+                  <li class="other-features-left" flex="50" layout-align="end">
+                      <ul layout="row" layout-align="space-between">
+                          <li><i ng-class="data.otherFeaturesIcon.pressure"></i></li>
+                          <li>Pressure</li>
+                      </ul>
+                  </li>
+                  <li class="other-features-right" flex="50">{{data.pressure.val}} {{data.pressure.unit}}</li>
+              </ul>
+          </div>
+
+          <div ng-show="showFiveDayForecast">TEST TEST TEST TEST</div>
 
           <md-card-actions layout="row" layout-align="end center">
             <md-button>Action 1</md-button>
