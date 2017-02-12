@@ -13,71 +13,71 @@ angular.module('weatherApp')
         };
 
         this.process = function(rawData) {
-            const time = processTime(rawData.dt);
+            const time = processTime(rawData.weather.dt);
 
             processedData.time = time;
 
             processedData.city = processString(
-                rawData.name
+                rawData.weather.name
             );
 
             processedData.country = processString(
-                rawData.sys.country
+                rawData.weather.sys.country
             );
 
             processedData.weatherMain = processString(
-                rawData.weather[0].main
+                rawData.weather.weather[0].main
             );
 
             processedData.weatherDescription = processString(
-                rawData.weather[0].description
+                rawData.weather.weather[0].description
             );
 
             processedData.temperature = processTemperature(
-                rawData.main.temp,
+                rawData.weather.main.temp,
                 'c'
             );
 
             processedData.pressure = processPressure(
-                rawData.main.pressure,
+                rawData.weather.main.pressure,
                 'mb'
             );
 
             processedData.windSpeed = processSpeed(
-                rawData.wind.speed,
+                rawData.weather.wind.speed,
                 'kph'
             );
 
             processedData.windDirection = processDegrees(
-                rawData.wind.deg
+                rawData.weather.wind.deg
             );
 
             processedData.sunrise = processTime(
-                rawData.sys.sunrise
+                rawData.weather.sys.sunrise
             );
 
             processedData.sunset = processTime(
-                rawData.sys.sunset
+                rawData.weather.sys.sunset
             );
 
             processedData.weatherIcon = processIcons.weather(
-                rawData.weather[0].id,
+                rawData.weather.weather[0].id,
                 time.hours
             );
 
             processedData.mainFeaturesIcon = processIcons.mainFeatures(
-                rawData.wind.deg
+                rawData.weather.wind.deg
             );
 
             processedData.otherFeaturesIcon = processIcons.otherFeatures();
 
             processedData.humidity = appendSuffix(
-                rawData.main.humidity,
+                rawData.weather.main.humidity,
                 '%'
             );
 
             processedData.percentCloud = appendSuffix(
-                rawData.clouds.all,
+                rawData.weather.clouds.all,
                 '%'
             );
 
@@ -357,7 +357,8 @@ angular.module('weatherApp')
                     sunrise: 'wi wi-sunrise',
                     sunset: 'wi wi-sunset',
                     humidity: 'wi wi-humidity',
-                    pressure: 'wi wi-barometer'
+                    pressure: 'wi wi-barometer',
+                    percentCloud: 'wi wi-cloudy'
                 };
             }
         };

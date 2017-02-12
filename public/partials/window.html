@@ -73,6 +73,15 @@
               <ul layout="row">
                   <li class="other-features-left" flex="50" layout-align="end">
                       <ul layout="row" layout-align="space-between">
+                          <li><i ng-class="data.otherFeaturesIcon.percentCloud"></i></li>
+                          <li>Cloudy</li>
+                      </ul>
+                  </li>
+                  <li class="other-features-right" flex="50">{{data.percentCloud.val}} {{data.percentCloud.unit}}</li>
+              </ul>
+              <ul layout="row">
+                  <li class="other-features-left" flex="50" layout-align="end">
+                      <ul layout="row" layout-align="space-between">
                           <li><i ng-class="data.otherFeaturesIcon.pressure"></i></li>
                           <li>Pressure</li>
                       </ul>
