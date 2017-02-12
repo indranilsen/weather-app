@@ -1,7 +1,9 @@
 var controller = function(service) {
     var getCurrentWeatherByCoords = function(req, res) {
-        res.send("COORDINATES");
-        service.getWeather('currentWeather', 'coords', req.query);
+        service.getWeather('currentWeather', 'coords', req.query).then(function (data) {
+            console.log(data);
+            res.send(data);
+        });
     };
 
     var getCurrentWeatherByLocation = function(req, res) {

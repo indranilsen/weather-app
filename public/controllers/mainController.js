@@ -12,7 +12,6 @@ app.controller('mainController', function($scope, $http, utils, processData) {
           };
           utils.getCurrentWeather("coords", reqParam)
               .then(function(res){
-                  console.log(res);
                   $scope.data = processData.process(res);
                   $scope.$broadcast('data-received');
               }, function(err){
