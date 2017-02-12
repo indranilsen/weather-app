@@ -134,6 +134,26 @@ angular.module('weatherApp')
             }
         };
 
+        var getFormattedTime = function(hrs, min, type) {
+            let h = hrs;
+            let m = min;
+            let meridian = '';
+
+            if(type === '12-hour') {
+                if(Math.floor(h/12) > 0) {
+                    meridian = 'PM';
+                } else {
+                    meridian = 'AM';
+                }
+                h = h % 12;
+            }
+
+            if (h < 10) {h = "0"+h;}
+            if (m < 10) {m = "0"+m;}
+
+            return (meridian == null) ? (h+':'+m) : (h+':'+m+' '+meridian);
+        };
+
         var processString = function(str) {
             let tokens = str.trim().split(' ');
 
@@ -227,6 +247,11 @@ angular.module('weatherApp')
                 minutes: date.getMinutes(),
                 day: getDay(date.getDay(), format),
                 month: getMonth(date.getMonth(), format),
+                formattedTime: getFormattedTime(
+                    date.getHours(),
+                    date.getMinutes(),
+                    '12-hour'
+                )
             };
         };
 
