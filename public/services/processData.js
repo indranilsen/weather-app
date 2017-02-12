@@ -81,6 +81,8 @@ angular.module('weatherApp')
                 '%'
             );
 
+            processedData.forecastData = processForecast(rawData.forecast);
+
             return processedData;
         };
 
@@ -374,6 +376,44 @@ angular.module('weatherApp')
             return {
                 val: value,
                 unit: suffix
+            };
+        };
+
+        var processForecast = function(forecastData) {
+            let tempMax = -Infinity;
+            let tempMin = Infinity;
+            let totalSnowfall = 0;
+            let totalRainfall = 0;
+
+            let objectsToScan = 9;
+
+            for(let i = 0; i<objectsToScan; i++) {
+                if (forecastData.list[i].main.temp_max > tempMax) {
+                    tempMax = forecastData.list[i].main.temp_max;
+                }
+
+                if (forecastData.list[i].main.temp_min < tempMin) {
+                    tempMin = forecastData.list[i].main.temp_min;
+                }
+
+                if ('snow' in forecastData.list[i]) {
+                    if (forecastData.list[i].snow["3h"]) {
+                        totalSnowfall += forecastData.list[i].snow["3h"];
+                    }
+                }
+
+                if ('rain' in forecastData.list[i]) {
+                    if (forecastData.list[i].rain["3h"]) {
+                        totalRainfall += forecastData.list[i].rain["3h"];
+                    }
+                }
+            }
+
+            return {
+                tempMin: processTemperature(tempMin, 'c'),
+                tempMax: processTemperature(tempMax, 'c'),
+                snow: appendSuffix(totalSnowfall, 'mm'),
+                rain: appendSuffix(totalRainfall, 'mm')
             };
         };
     });
