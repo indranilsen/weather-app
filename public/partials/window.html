@@ -29,9 +29,13 @@
                           {{data.forecastData.tempMin.val}} &deg;{{data.forecastData.tempMin.unit}} | {{data.forecastData.tempMax.val}} &deg;{{data.forecastData.tempMax.unit}}
                       </li>
                   </ul>
-                  <ul layout="column" layout-align="space-between">
+                  <ul layout="column" layout-align="space-between" ng-if="data.forecastData.display!=='snow'">
                       <li><i ng-class="data.mainFeaturesIcon.rain"></i></li>
-                      <li>10&#37;</li>
+                      <li>{{data.forecastData.rain.val}} {{data.forecastData.rain.unit}}</li>
+                  </ul>
+                  <ul layout="column" layout-align="space-between" class="display-snow" ng-if="data.forecastData.display==='snow'">
+                      <li><i ng-class="data.mainFeaturesIcon.snow"></i></li>
+                      <li>{{data.forecastData.rain.val}} {{data.forecastData.rain.unit}}</li>
                   </ul>
                   <ul layout="column" layout-align="space-between">
                       <li><i ng-class="data.mainFeaturesIcon.wind"></i></li>

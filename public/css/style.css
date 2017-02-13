@@ -98,6 +98,12 @@ ul {
 	padding-top: 0;
 }
 
+.window .weather-content .main-features .display-snow {
+	padding-left: 0.7em !important;
+	padding-right: 0.7em !important;
+	font-size: 0.9em !important;
+}
+
 .window .weather-content .main-features div {
 	border-bottom: 1px solid grey;
 	padding: 0.2em 20% 0.2em 20%;

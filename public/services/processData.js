@@ -351,6 +351,7 @@ angular.module('weatherApp')
                 return {
                     thermometer: 'wi wi-thermometer',
                     rain: 'wi wi-raindrops',
+                    snow: 'wi wi-snow',
                     wind: direction
                 };
             },
@@ -384,6 +385,7 @@ angular.module('weatherApp')
             let tempMin = Infinity;
             let totalSnowfall = 0;
             let totalRainfall = 0;
+            let display = 'rain';
 
             let objectsToScan = 9;
 
@@ -409,11 +411,16 @@ angular.module('weatherApp')
                 }
             }
 
+            if (totalSnowfall > totalRainfall) {
+                display = 'snow';
+            }
+
             return {
                 tempMin: processTemperature(tempMin, 'c'),
                 tempMax: processTemperature(tempMax, 'c'),
                 snow: appendSuffix(totalSnowfall, 'mm'),
-                rain: appendSuffix(totalRainfall, 'mm')
+                rain: appendSuffix(totalRainfall, 'mm'),
+                display: display
             };
         };
     });
